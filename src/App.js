@@ -1,25 +1,47 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
 
-function App() {
+function TextField(props) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <label>{props.label}</label>
+      <input type="text" value={props.value} onChange={props.changeHandler} />
     </div>
   );
+}
+
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      name: 'Martin',
+      firstName: 'Sophie',
+      age: 39,
+    };
+  }
+  clickHandler = () => {
+    alert('Hello ' + this.state.firstName);
+  };
+
+  handleFirstNameChange = even => {
+    this.setState({ firstName: even.target.value });
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <TextField
+          label="Prénom"
+          value={this.state.firstName}
+          changeHandler={this.handleFirstNameChange}
+        />
+
+        <button type="button" onClick={this.clickHandler}>
+          Valider
+        </button>
+      </div>
+    );
+  }
 }
 
 export default App;
